@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameTest {
     Game game = new Game();
@@ -21,12 +22,12 @@ public class GameTest {
 
     @Test
     public void shouldRegister() {
-        ArrayList<Player> expected = new ArrayList<>();
-        expected.add(player1);
-        expected.add(player2);
-        expected.add(player3);
-        ArrayList<Player> actual = game.getPlayers();
-        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
+        HashMap<String, Integer> expected = new HashMap<>();
+        expected.put(player1.getName(), player1.getStrength());
+        expected.put(player2.getName(), player2.getStrength());
+        expected.put(player3.getName(), player3.getStrength());
+        HashMap<String, Integer> actual = game.getPlayers();
+        Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest
