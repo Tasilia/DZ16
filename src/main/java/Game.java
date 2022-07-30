@@ -1,16 +1,14 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.HashMap;
 
 public class Game {
 
-    private ArrayList<Player> players = new ArrayList<>();
+    private HashMap<String, Integer> players = new HashMap<>();
 
     public void register(Player player) {
-        players.add(player);
+        players.put(player.getName(), player.getStrength());
     }
 
-    public ArrayList<Player> getPlayers() {
+    public HashMap<String, Integer> getPlayers() {
         return players;
     }
 
@@ -20,14 +18,13 @@ public class Game {
         int strength1 = 0;
         int strength2 = 0;
         int result = -1;
-        for (Player player : players) {
-            if (player.getName().equals(playerName1)) {
-                isRegistered1 = true;
-                strength1 = player.getStrength();
-            } else if (player.getName().equals(playerName2)) {
-                isRegistered2 = true;
-                strength2 = player.getStrength();
-            }
+        if (players.containsKey(playerName1)) {
+            isRegistered1 = true;
+            strength1 = players.get(playerName1);
+        }
+        if (players.containsKey(playerName2)) {
+            isRegistered2 = true;
+            strength2 = players.get(playerName2);
         }
         if (isRegistered1 && isRegistered2) {
             if (strength1 > strength2) {
